@@ -1,372 +1,356 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8">
+  <title>ZType Clone</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0b0e14;
+      color: #e0e6ed;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      box-shadow: 0 0 40px rgba(0, 220, 255, 0.2);
+      border: 1px solid #1f2937;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      background: radial-gradient(circle at 50% 100%, #151d2a 0%, #080a0f 100%);
+    }
+    #ui-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+    }
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .hud span { color: #38bdf8; }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;ZType Clone&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #0b0e14;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #e0e6ed;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>#game-container {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 0 40px rgba(0, 220, 255, 0.2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #1f2937;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>canvas {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at 50% 100%, #151d2a 0%, #080a0f 100%);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>#ui-overlay {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hud {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #64748b;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hud span { color: #38bdf8; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="game-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="gameCanvas" width="600" height="800"&gt;&lt;/canvas&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="ui-overlay"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hud"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;Wave: &lt;span id="hud-wave"&gt;1&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;Score: &lt;span id="hud-score"&gt;0&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 1. YOUR CUSTOM TEXT / WORDS HERE</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const CUSTOM_WORDS = [</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"space", "laser", "galaxy", "stellar", "nebula",<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">      </span>"comet", "meteor", "orbit", "planet", "plasma",</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"velocity", "quantum", "gravity", "cosmos", "horizon",</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"vortex", "eclipse", "supernova", "asteroid", "pulsar"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 2. ENGINE SETUP</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const canvas = document.getElementById("gameCanvas");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const ctx = canvas.getContext("2d");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const hudScore = document.getElementById("hud-score");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const hudWave = document.getElementById("hud-wave");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const WIDTH = canvas.width;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const HEIGHT = canvas.height;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>let score = 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let wave = 1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let enemies = [];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let lasers = [];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let particles = [];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let activeTarget = null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let gameState = "START"; // "START", "PLAYING", "GAMEOVER"</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const player = {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>x: WIDTH / 2,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>y: HEIGHT - 60,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>targetAngle: -Math.PI / 2</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 3. GAME CLASSES</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>class Enemy {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>constructor(word, speed) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.word = word;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.typed = 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.x = 80 + Math.random() * (WIDTH - 160);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.y = -20;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.speed = speed;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.radius = 14;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>update() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.y += this.speed;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (this.y &gt;= player.y - 15) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameOver();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>draw() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Enemy ship hull</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.translate(this.x, this.y);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fillStyle = this === activeTarget ? "#f43f5e" : "#38bdf8";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.moveTo(0, 10);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineTo(-8, -6);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineTo(8, -6);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.closePath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fill();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.restore();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Render text label</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.font = "bold 15px monospace";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.textAlign = "center";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const textY = this.y - 14;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const totalWidth = ctx.measureText(this.word).width;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let startX = this.x - totalWidth / 2;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>for (let i = 0; i &lt; this.word.length; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const char = this.word[i];</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const charWidth = ctx.measureText(char).width;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillStyle = i &lt; this.typed ? "#4ade80" : "#ffffff";</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillText(char, startX + charWidth / 2, textY);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>startX += charWidth;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>class Laser {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>constructor(x1, y1, x2, y2) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.x1 = x1;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.y1 = y1;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.x2 = x2;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.y2 = y2;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.life = 6;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>update() { this.life--; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>draw() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.strokeStyle = `rgba(56, 189, 248, ${this.life / 6})`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineWidth = 3;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.moveTo(this.x1, this.y1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineTo(this.x2, this.y2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.stroke();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.restore();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>class Particle {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>constructor(x, y, color) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.x = x;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.y = y;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.vx = (Math.random() - 0.5) * 5;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.vy = (Math.random() - 0.5) * 5;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.color = color;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.life = 20 + Math.random() * 10;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.maxLife = this.life;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>update() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.x += this.vx;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.y += this.vy;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.life--;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>draw() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fillStyle = this.color;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.globalAlpha = Math.max(0, this.life / this.maxLife);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fillRect(this.x, this.y, 2, 2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.restore();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 4. LOGIC &amp; SPAWNING</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function startWave(waveNumber) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>hudWave.textContent = waveNumber;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const count = 4 + waveNumber * 2;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const baseSpeed = 0.4 + waveNumber * 0.1;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; count; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const word = CUSTOM_WORDS[Math.floor(Math.random() * CUSTOM_WORDS.length)];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const enemy = new Enemy(word, baseSpeed + Math.random() * 0.3);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Stagger spawn positions vertically</p>
-<p class="p1"><span class="Apple-converted-space">        </span>enemy.y = -40 - (i * 65);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>enemies.push(enemy);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function createExplosion(x, y, color = "#38bdf8") {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; 24; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>particles.push(new Particle(x, y, color));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function gameOver() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gameState = "GAMEOVER";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>activeTarget = null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function resetGame() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>score = 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>wave = 1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>enemies = [];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lasers = [];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>particles = [];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>activeTarget = null;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>hudScore.textContent = score;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>startWave(wave);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gameState = "PLAYING";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 5. INPUT HANDLING</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>window.addEventListener("keydown", (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (gameState === "START" || gameState === "GAMEOVER") {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (e.key === "Enter" || e.key === " ") resetGame();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const key = e.key.toLowerCase();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!/^[a-z]$/.test(key)) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Acquire target if none is locked</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!activeTarget) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let bestTarget = null;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let highestY = -Infinity;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>for (const enemy of enemies) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (enemy.y &gt; 0 &amp;&amp; enemy.word[0].toLowerCase() === key) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (enemy.y &gt; highestY) {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>highestY = enemy.y;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>bestTarget = enemy;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>activeTarget = bestTarget;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Process input on current target</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (activeTarget) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const expectedChar = activeTarget.word[activeTarget.typed].toLowerCase();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (key === expectedChar) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>activeTarget.typed++;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>score += 10;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>hudScore.textContent = score;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>// Aim cannon and fire</p>
-<p class="p1"><span class="Apple-converted-space">          </span>player.targetAngle = Math.atan2(activeTarget.y - player.y, activeTarget.x - player.x);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>lasers.push(new Laser(player.x, player.y, activeTarget.x, activeTarget.y));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>// Word completed</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (activeTarget.typed &gt;= activeTarget.word.length) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>createExplosion(activeTarget.x, activeTarget.y, "#4ade80");</p>
-<p class="p1"><span class="Apple-converted-space">            </span>enemies = enemies.filter(item =&gt; item !== activeTarget);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>activeTarget = null;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>score += 50;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>hudScore.textContent = score;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Trigger next wave if all enemies cleared</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (enemies.length === 0) {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>wave++;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>startWave(wave);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 6. MAIN LOOP</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==========================================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function loop() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.clearRect(0, 0, WIDTH, HEIGHT);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (gameState === "PLAYING") {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Updates</p>
-<p class="p1"><span class="Apple-converted-space">        </span>lasers.forEach(l =&gt; l.update());</p>
-<p class="p1"><span class="Apple-converted-space">        </span>lasers = lasers.filter(l =&gt; l.life &gt; 0);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>particles.forEach(p =&gt; p.update());</p>
-<p class="p1"><span class="Apple-converted-space">        </span>particles = particles.filter(p =&gt; p.life &gt; 0);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>enemies.forEach(e =&gt; e.update());</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Renders</p>
-<p class="p1"><span class="Apple-converted-space">        </span>lasers.forEach(l =&gt; l.draw());</p>
-<p class="p1"><span class="Apple-converted-space">        </span>enemies.forEach(e =&gt; e.draw());</p>
-<p class="p1"><span class="Apple-converted-space">        </span>particles.forEach(p =&gt; p.draw());</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Player Ship</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.translate(player.x, player.y);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.rotate(player.targetAngle + Math.PI / 2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fillStyle = "#e0e7ff";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.moveTo(0, -16);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineTo(-12, 12);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineTo(0, 6);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineTo(12, 12);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.closePath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fill();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.restore();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Menu screens</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.fillStyle = "#ffffff";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.textAlign = "center";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.font = "bold 26px sans-serif";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (gameState === "START") {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillText("TYPE TO SHOOT", WIDTH / 2, HEIGHT / 2 - 20);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.font = "16px sans-serif";</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillStyle = "#94a3b8";</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillText("Press SPACE to begin", WIDTH / 2, HEIGHT / 2 + 20);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else if (gameState === "GAMEOVER") {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillStyle = "#f43f5e";</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillText("CRITICAL FAILURE", WIDTH / 2, HEIGHT / 2 - 20);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.font = "16px sans-serif";</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillStyle = "#94a3b8";</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ctx.fillText(`Final Score: ${score} — Press SPACE to restart`, WIDTH / 2, HEIGHT / 2 + 20);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>requestAnimationFrame(loop);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>loop();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+  <div id="game-container">
+    <canvas id="gameCanvas" width="600" height="800"></canvas>
+    <div id="ui-overlay">
+      <div class="hud">
+        <div>Wave: <span id="hud-wave">1</span></div>
+        <div>Score: <span id="hud-score">0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. YOUR CUSTOM TEXT / WORDS HERE
+    // ==========================================
+    const CUSTOM_WORDS = [
+      "space", "laser", "galaxy", "stellar", "nebula", 
+      "comet", "meteor", "orbit", "planet", "plasma",
+      "velocity", "quantum", "gravity", "cosmos", "horizon",
+      "vortex", "eclipse", "supernova", "asteroid", "pulsar"
+    ];
+
+    // ==========================================
+    // 2. ENGINE SETUP
+    // ==========================================
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const hudScore = document.getElementById("hud-score");
+    const hudWave = document.getElementById("hud-wave");
+
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
+
+    let score = 0;
+    let wave = 1;
+    let enemies = [];
+    let lasers = [];
+    let particles = [];
+    let activeTarget = null;
+    let gameState = "START"; // "START", "PLAYING", "GAMEOVER"
+
+    const player = {
+      x: WIDTH / 2,
+      y: HEIGHT - 60,
+      targetAngle: -Math.PI / 2
+    };
+
+    // ==========================================
+    // 3. GAME CLASSES
+    // ==========================================
+    class Enemy {
+      constructor(word, speed) {
+        this.word = word;
+        this.typed = 0;
+        this.x = 80 + Math.random() * (WIDTH - 160);
+        this.y = -20;
+        this.speed = speed;
+        this.radius = 14;
+      }
+
+      update() {
+        this.y += this.speed;
+        if (this.y >= player.y - 15) {
+          gameOver();
+        }
+      }
+
+      draw() {
+        // Enemy ship hull
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.fillStyle = this === activeTarget ? "#f43f5e" : "#38bdf8";
+        ctx.beginPath();
+        ctx.moveTo(0, 10);
+        ctx.lineTo(-8, -6);
+        ctx.lineTo(8, -6);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // Render text label
+        ctx.font = "bold 15px monospace";
+        ctx.textAlign = "center";
+
+        const textY = this.y - 14;
+        const totalWidth = ctx.measureText(this.word).width;
+        let startX = this.x - totalWidth / 2;
+
+        for (let i = 0; i < this.word.length; i++) {
+          const char = this.word[i];
+          const charWidth = ctx.measureText(char).width;
+          ctx.fillStyle = i < this.typed ? "#4ade80" : "#ffffff";
+          ctx.fillText(char, startX + charWidth / 2, textY);
+          startX += charWidth;
+        }
+      }
+    }
+
+    class Laser {
+      constructor(x1, y1, x2, y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.life = 6;
+      }
+      update() { this.life--; }
+      draw() {
+        ctx.save();
+        ctx.strokeStyle = `rgba(56, 189, 248, ${this.life / 6})`;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(this.x1, this.y1);
+        ctx.lineTo(this.x2, this.y2);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 5;
+        this.vy = (Math.random() - 0.5) * 5;
+        this.color = color;
+        this.life = 20 + Math.random() * 10;
+        this.maxLife = this.life;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life--;
+      }
+      draw() {
+        ctx.save();
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = Math.max(0, this.life / this.maxLife);
+        ctx.fillRect(this.x, this.y, 2, 2);
+        ctx.restore();
+      }
+    }
+
+    // ==========================================
+    // 4. LOGIC & SPAWNING
+    // ==========================================
+    function startWave(waveNumber) {
+      hudWave.textContent = waveNumber;
+      const count = 4 + waveNumber * 2;
+      const baseSpeed = 0.4 + waveNumber * 0.1;
+
+      for (let i = 0; i < count; i++) {
+        const word = CUSTOM_WORDS[Math.floor(Math.random() * CUSTOM_WORDS.length)];
+        const enemy = new Enemy(word, baseSpeed + Math.random() * 0.3);
+        // Stagger spawn positions vertically
+        enemy.y = -40 - (i * 65);
+        enemies.push(enemy);
+      }
+    }
+
+    function createExplosion(x, y, color = "#38bdf8") {
+      for (let i = 0; i < 24; i++) {
+        particles.push(new Particle(x, y, color));
+      }
+    }
+
+    function gameOver() {
+      gameState = "GAMEOVER";
+      activeTarget = null;
+    }
+
+    function resetGame() {
+      score = 0;
+      wave = 1;
+      enemies = [];
+      lasers = [];
+      particles = [];
+      activeTarget = null;
+      hudScore.textContent = score;
+      startWave(wave);
+      gameState = "PLAYING";
+    }
+
+    // ==========================================
+    // 5. INPUT HANDLING
+    // ==========================================
+    window.addEventListener("keydown", (e) => {
+      if (gameState === "START" || gameState === "GAMEOVER") {
+        if (e.key === "Enter" || e.key === " ") resetGame();
+        return;
+      }
+
+      const key = e.key.toLowerCase();
+      if (!/^[a-z]$/.test(key)) return;
+
+      // Acquire target if none is locked
+      if (!activeTarget) {
+        let bestTarget = null;
+        let highestY = -Infinity;
+
+        for (const enemy of enemies) {
+          if (enemy.y > 0 && enemy.word[0].toLowerCase() === key) {
+            if (enemy.y > highestY) {
+              highestY = enemy.y;
+              bestTarget = enemy;
+            }
+          }
+        }
+        activeTarget = bestTarget;
+      }
+
+      // Process input on current target
+      if (activeTarget) {
+        const expectedChar = activeTarget.word[activeTarget.typed].toLowerCase();
+        if (key === expectedChar) {
+          activeTarget.typed++;
+          score += 10;
+          hudScore.textContent = score;
+
+          // Aim cannon and fire
+          player.targetAngle = Math.atan2(activeTarget.y - player.y, activeTarget.x - player.x);
+          lasers.push(new Laser(player.x, player.y, activeTarget.x, activeTarget.y));
+
+          // Word completed
+          if (activeTarget.typed >= activeTarget.word.length) {
+            createExplosion(activeTarget.x, activeTarget.y, "#4ade80");
+            enemies = enemies.filter(item => item !== activeTarget);
+            activeTarget = null;
+            score += 50;
+            hudScore.textContent = score;
+
+            // Trigger next wave if all enemies cleared
+            if (enemies.length === 0) {
+              wave++;
+              startWave(wave);
+            }
+          }
+        }
+      }
+    });
+
+    // ==========================================
+    // 6. MAIN LOOP
+    // ==========================================
+    function loop() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+      if (gameState === "PLAYING") {
+        // Updates
+        lasers.forEach(l => l.update());
+        lasers = lasers.filter(l => l.life > 0);
+
+        particles.forEach(p => p.update());
+        particles = particles.filter(p => p.life > 0);
+
+        enemies.forEach(e => e.update());
+
+        // Renders
+        lasers.forEach(l => l.draw());
+        enemies.forEach(e => e.draw());
+        particles.forEach(p => p.draw());
+
+        // Player Ship
+        ctx.save();
+        ctx.translate(player.x, player.y);
+        ctx.rotate(player.targetAngle + Math.PI / 2);
+        ctx.fillStyle = "#e0e7ff";
+        ctx.beginPath();
+        ctx.moveTo(0, -16);
+        ctx.lineTo(-12, 12);
+        ctx.lineTo(0, 6);
+        ctx.lineTo(12, 12);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      } else {
+        // Menu screens
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.font = "bold 26px sans-serif";
+
+        if (gameState === "START") {
+          ctx.fillText("TYPE TO SHOOT", WIDTH / 2, HEIGHT / 2 - 20);
+          ctx.font = "16px sans-serif";
+          ctx.fillStyle = "#94a3b8";
+          ctx.fillText("Press SPACE to begin", WIDTH / 2, HEIGHT / 2 + 20);
+        } else if (gameState === "GAMEOVER") {
+          ctx.fillStyle = "#f43f5e";
+          ctx.fillText("CRITICAL FAILURE", WIDTH / 2, HEIGHT / 2 - 20);
+          ctx.font = "16px sans-serif";
+          ctx.fillStyle = "#94a3b8";
+          ctx.fillText(`Final Score: ${score} — Press SPACE to restart`, WIDTH / 2, HEIGHT / 2 + 20);
+        }
+      }
+
+      requestAnimationFrame(loop);
+    }
+
+    loop();
+  </script>
 </body>
 </html>
